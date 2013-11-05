@@ -1,0 +1,7 @@
+function CreateMockRepo()
+{
+	var repo = new MemoryRepo();
+	repo.add(1, "Nils, Nilsson");
+	repo.save();
+	return repo;
+}

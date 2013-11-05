@@ -1,0 +1,44 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>My Timeterminal</title>
+	<script type="text/javascript" src='js/tt.js'></script>
+	<script type="text/javascript" src='js/ttmemoryrepo.js'></script>
+	<script type="text/javascript" src='js/knockout-3.0.0.js'></script>
+	<link rel='stylesheet' type='text/css' href='js/tt.css' />
+</head>
+<body>
+	<h1>My Timeterminal</h1>
+
+	<section id="identifierButtonsSection">
+		<!-- identifier -->
+		<input data-bind='value: identifier' class='tt_identifier'/>
+
+		<!-- buttons -->
+		<div id='buttonRows' data-bind='foreach: layout.buttons'>
+			<br>
+			<div id='buttonCols' data-bind='foreach: $data'>
+				<!-- <pre data-bind='text: ko.toJSON($root,null,2)'></pre> -->
+				<button data-bind='text: $data, click: $root.layout.buttonPress' class='dark_button'></button>
+			</div>
+		</div>
+	</section>
+
+
+
+	<section id="actionButtonsSection">
+		<!-- actionbuttons -->
+		<span id='actionbuttonsRow' data-bind='foreach: layout.actionButtons'>
+		<!-- <pre data-bind='text: ko.toJSON($data,null,2)'></pre> -->
+			<button data-bind='text: $data.description, click: $root.layout.actionbuttonPress' class='dark_button'></button>
+		</span>
+	</section>
+		
+
+	<script type="text/javascript">
+		var repo = new MemoryRepo();
+		var model = new ViewModel(repo);
+		ko.applyBindings(model);
+	</script>
+</body>
+</html>
