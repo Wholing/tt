@@ -1,3 +1,14 @@
+//ko.validation.rules.pattern.message = 'Invalid.';
+
+//ko.extenders.numeric = function(target) {
+//	target.hasError = ko.observable();
+	//target.validationMessage = ko.observable();
+
+//	function validate(newValue) {
+
+//	}
+//}
+
 var Action = function(id, description)
 {
 	this.id = id;
@@ -23,7 +34,13 @@ var ViewModelLayout = function()
 		]);
 
 	self.actionbuttonPress = function(action) {
-		alert(action.description);
+        alert(action.description);
+//        if (ViewModelLayout.errors().length == 0) {
+//            alert('Thank you.');
+//        } else {
+//            alert('Please check your submission.');
+//            ViewModelLayout.errors.showAllMessages();
+//        };				
 	};
 
 	self.buttonPress = function(data) {
@@ -63,7 +80,7 @@ var ViewModelLayout = function()
 var ViewModel = function(repo)
 {
 	var self = this;
-	self.identifier = ko.observable('');
+	self.identifier = ko.observable('').extend( { number: true}); //.extend({ minLength: 2, maxLength: 10 });
 	self.actions = ko.observableArray();
     self.errorMessage = ko.observable();
 
