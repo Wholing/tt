@@ -31,13 +31,17 @@
 		<!-- actionbuttons -->
 		<span id='actionbuttonsRow' data-bind='foreach: layout.actionButtons'>
 		<!-- <pre data-bind='text: ko.toJSON($data,null,2)'></pre> -->
-			<button data-bind='text: $data.description, click: $root.layout.actionbuttonPress' class='dark_button'></button>
+			<button data-bind='text: $data.description, click: $root.addAction' class='dark_button'></button>
 		</span>
 	</section>
 		
+<!--	<section id="errorMessageSection">-->
+		<input data-bind="value: errorMessage"/>
+<!--	</section> -->
 
 	<script type="text/javascript">
 		var repo = new MemoryRepo();
+		MockDataCreator(repo);
 		var model = new ViewModel(repo);
 		ko.applyBindings(model);
 	</script>

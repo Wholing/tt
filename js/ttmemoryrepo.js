@@ -1,24 +1,31 @@
-var MemoryRepo = function() {
-	var self = this;
-	self._pendingdata = [];
-	self._data = [];
+function MemoryRepo () {
+	var _pendingdata = [];
+	var _data = [];
 
-	self.add = function(id, data){
+	this.add = function(id, data){
 		toAdd = { 'id': id, 'data' : data};
-		self._pendingdata.push(toAdd);
+		_pendingdata.push(toAdd);
 	};
 
-	self.save = function(){
-		self._data.push.apply(self._data, self._pendingdata);
-		self._pendingdata = [];
+	this.save = function(){
+		_data.push.apply(_data, _pendingdata);
+		_pendingdata = [];
 	};
 
-	self.getById = function(id){
-		for (var i = self._data.length - 1; i >= 0; i--) {
-			if (self._data[i].id===id)
-				return self._data[i].data;
+	this.getById = function(id){
+		for (var i = _data.length - 1; i >= 0; i--) {
+			if (_data[i].id===id)
+				return _data[i].data;
 		}; 
 		return null;
 	};
 
+	this.getAll = function() {
+		return _data;
+	}
 }
+
+MockDataCreator = function(repo)
+{
+	repo.add(1,"Nils Nilsson");
+};

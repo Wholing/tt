@@ -74,41 +74,60 @@ describe("Main test", function() {
 		target.identifier(id);
 		expect(target.lastAction().description).toBe('In');
 	});
+	it('Should be possible to clear error message', function() {
+		target = new ViewModel(CreateMockRepo());
+		target.identifier(0);
+		target.addAction(new Action(0,"in"));
+		expect(target.errorMessage()).not.toBe('');
+		target.clearErrorMessage();
+		expect(target.errorMessage()).toBe('');
+	});
+	it('Should be possible to clear identifier', function() {
+		target = new ViewModel(CreateMockRepo());
+		target.identifier(0);
+		expect(target.identifier()).toBe(0);
+		target.clearIdentifier();
+		expect(target.identifier()).toBe('');
+	});
 });
 
 
 describe("Tests for input", function() {
 	it('Should be possible to enter numbers to model', function() {
-		var target = new ViewModel(CreateMockRepo()).layout;
+		var target = new ViewModel(CreateMockRepo());
+		var layout = target.layout;
 		//target.buttonPress('1');
-		target.addValue('1')
+		layout.addValue('1')
 		expect(target.identifier()).toBe('1');
 	});
 	it('Should be possible to remove last character of identifier', function() {
-		var target = new ViewModel(CreateMockRepo()).layout;
+		var target = new ViewModel(CreateMockRepo());
+		var layout = target.layout;
 		//target.buttonPress('1');
-		target.addValue('1')
+		layout.addValue('1')
 		expect(target.identifier()).toBe('1');
-		target.addValue('2')
+		layout.addValue('2')
 		expect(target.identifier()).toBe('12');
-		target.removeLastValue();
+		layout.removeLastValue();
 		expect(target.identifier()).toBe('1');
 	});
 	it('Should be possible to clear all values of identifier', function() {
-		var target = new ViewModel(CreateMockRepo()).layout;
+		var target = new ViewModel(CreateMockRepo());
+		var layout = target.layout;
 		//target.buttonPress('1');
-		target.addValue('1')
+		layout.addValue('1')
 		expect(target.identifier()).toBe('1');
-		target.addValue('2')
+		layout.addValue('2')
 		expect(target.identifier()).toBe('12');
-		target.clearValues();
+		layout.clearValues();
 		expect(target.identifier()).toBe('');
 	});
 	it('Should be possible to enter numbers by pressing number buttons', function() {
-		var target = new ViewModel(CreateMockRepo()).layout;
-		target.buttonPress('1');
+		var target = new ViewModel(CreateMockRepo());
+		var layout = target.layout;
+		layout.buttonPress('1');
 		expect(target.identifier()).toBe('1');
-		target.buttonPress('2');
+		layout.buttonPress('2');
 		expect(target.identifier()).toBe('12');
 	});
 

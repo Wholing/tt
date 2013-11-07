@@ -15,10 +15,10 @@ var Action = function(id, description)
 	this.description = description;
 }
 
-var ViewModelLayout = function()
+var ViewModelLayout = function(identifier)
 {
 	var self = this; 
-	self.identifier = ko.observable('');
+	var _identifier = identifier;
 
 	self.buttons = ko.observableArray( [
 		ko.observableArray( ['1','2','3']),
@@ -47,14 +47,14 @@ var ViewModelLayout = function()
 		self.addValue(data);
 	};
 	self.clearValues = function() {
-		self.identifier('');
+		_identifier('');
 	};	
 	self.removeLastValue = function() {
-		if (self.identifier().length > 0)
+		if (_identifier().length > 0)
 		{
-			var actualValues = self.identifier();
+			var actualValues = _identifier();
 			var newValues = actualValues.substring(0, actualValues.length-1);
-			self.identifier(newValues);
+			_identifier(newValues);
 		}
 	};
 
@@ -69,8 +69,8 @@ var ViewModelLayout = function()
 			self.clearValues();
 			return;
 		}
-		var newValue = self.identifier() + newValue;
-		self.identifier(newValue);
+		var newValue = _identifier() + newValue;
+		_identifier(newValue);
 	};
 
 
@@ -82,18 +82,9 @@ var ViewModel = function(repo)
 	var self = this;
 	self.identifier = ko.observable('').extend( { number: true}); //.extend({ minLength: 2, maxLength: 10 });
 	self.actions = ko.observableArray();
-    self.errorMessage = ko.observable();
+    self.errorMessage = ko.observable('');
 
     self.layout = new ViewModelLayout(self.identifier);
-    
-	self.layout.identifier.subscribe(function(newvalue) {
-		self.identifier(newvalue);
-	});
-
-	//self.layout.actionbuttonPress.subscribe(function(newvalue){
-	//	self.addAction(newValue);
-	//});
-
 
     self._repo = repo;
 
@@ -114,7 +105,6 @@ var ViewModel = function(repo)
 			self._repo.add(person);
 			self._repo.save();
 			self.actions.push(action);
-			console.log("Added action");
 		}
 	};
 
@@ -131,5 +121,13 @@ var ViewModel = function(repo)
 		var person = self._getPerson();
 		return person != null;
 	}
+
+	self.clearErrorMessage = function () {
+		self.errorMessage('');
+	};
+
+	self.clearIdentifier = function () {
+		self.identifier('');
+	};
 
 }
