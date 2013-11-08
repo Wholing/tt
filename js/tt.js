@@ -15,10 +15,11 @@ var Action = function(id, description)
 	this.description = description;
 }
 
-var ViewModelLayout = function(identifier)
+var ViewModelLayout = function(identifier, addAction)
 {
 	var self = this; 
 	var _identifier = identifier;
+	var _addAction = addAction;
 
 	self.buttons = ko.observableArray( [
 		ko.observableArray( ['1','2','3']),
@@ -34,7 +35,8 @@ var ViewModelLayout = function(identifier)
 		]);
 
 	self.actionbuttonPress = function(action) {
-        alert(action.description);
+	    alert(action.description);
+	    _addAction(action);
 //        if (ViewModelLayout.errors().length == 0) {
 //            alert('Thank you.');
 //        } else {
@@ -79,12 +81,13 @@ var ViewModelLayout = function(identifier)
 
 var ViewModel = function(repo)
 {
-	var self = this;
+    var self = this;
+    var errorMessageDisplayTime = 2000; // ms
 	self.identifier = ko.observable('').extend( { number: true}); //.extend({ minLength: 2, maxLength: 10 });
 	self.actions = ko.observableArray();
-    self.errorMessage = ko.observable('');
+	self.errorMessage = ko.observable('');
 
-    self.layout = new ViewModelLayout(self.identifier);
+    self.layout = new ViewModelLayout(self.identifier, self.addAction);
 
     self._repo = repo;
 
@@ -97,7 +100,7 @@ var ViewModel = function(repo)
 		var person = self._getPerson();
 		if (person == null)
 		{
-			self.errorMessage("Person not found");
+		    self.showErrorMessage("Person not found");
 		}
 		else
 		{
@@ -106,6 +109,7 @@ var ViewModel = function(repo)
 			self._repo.save();
 			self.actions.push(action);
 		}
+		self.clearIdentifier();
 	};
 
 	self.lastAction = function() {
@@ -121,6 +125,12 @@ var ViewModel = function(repo)
 		var person = self._getPerson();
 		return person != null;
 	}
+
+	self.showErrorMessage = function (text) {
+	    self.errorMessage(text);
+	    setTimeout(self.clearErrorMessage, errorMessageDisplayTime);
+	};
+
 
 	self.clearErrorMessage = function () {
 		self.errorMessage('');

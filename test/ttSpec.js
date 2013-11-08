@@ -74,6 +74,15 @@ describe("Main test", function() {
 		target.identifier(id);
 		expect(target.lastAction().description).toBe('In');
 	});
+	it('Should be possible to display error message', function () {
+	    target = new ViewModel(CreateMockRepo());
+	    target.showErrorMessage('error');
+	    expect(target.errorMessage()).toBe('error');
+	    setTimeout(function () {
+	        expect(target.errorMessage()).toBe('');
+	    }, 2000);
+	    
+	});
 	it('Should be possible to clear error message', function() {
 		target = new ViewModel(CreateMockRepo());
 		target.identifier(0);

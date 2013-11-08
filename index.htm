@@ -13,7 +13,8 @@
 
 	<section id="identifierButtonsSection">
 		<!-- identifier -->
-		<input data-bind='value: identifier' class='tt_identifier'/>
+		<div><input data-bind='value: identifier' class='tt_identifier'/></div>
+        <div><input data-bind="value: errorMessage" class='tt_errorMessage'/></div>
 
 		<!-- buttons -->
 		<div id='buttonRows' data-bind='foreach: layout.buttons'>
@@ -25,8 +26,6 @@
 		</div>
 	</section>
 
-
-
 	<section id="actionButtonsSection">
 		<!-- actionbuttons -->
 		<span id='actionbuttonsRow' data-bind='foreach: layout.actionButtons'>
@@ -35,10 +34,6 @@
 		</span>
 	</section>
 		
-<!--	<section id="errorMessageSection">-->
-		<input data-bind="value: errorMessage"/>
-<!--	</section> -->
-
 	<script type="text/javascript">
 		var repo = new MemoryRepo();
 		MockDataCreator(repo);

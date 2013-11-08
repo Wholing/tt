@@ -12,8 +12,8 @@ section#identifierButtonsSection {
 
 section#actionButtonsSection {
  float: left;
- margin-left: 20;
- width: 100px;
+ margin-left: 20px;
+ width: 20px;
 }
 
 .tt_identifier  {
@@ -31,13 +31,34 @@ section#actionButtonsSection {
    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
    box-shadow: rgba(0,0,0,1) 0 1px 0;
-   width:235;
-   height:45;
+   width:235px;
+   height:45px;
    font-size: 25px;
    color:#FFFFFF;
    text-align:center;
 }
 
+.tt_errorMessage   {
+   border-top: 1px solid #969696;
+   background: #000000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#545454), to(#000000));
+   background: -webkit-linear-gradient(top, #545454, #000000);
+   background: -moz-linear-gradient(top, #545454, #000000);
+   background: -ms-linear-gradient(top, #545454, #000000);
+   background: -o-linear-gradient(top, #545454, #000000);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   width:235px;
+   height:35px;
+   font-size: 25px;
+   color:#FFFFFF;
+   text-align:center;
+}
 
 .dark_button{
     border-top: 1px solid #969696;
