@@ -25,4 +25,13 @@ describe("Memory repo tests", function() {
 		var item = target.getById('myid');
 		expect(item).toBe('new data');
 	});
+	it('should be possible to get item by id int and id string as equals', function() {
+		target = new MemoryRepo();
+		target.add(1, 'some data');
+		target.save();
+		var item = target.getById(1);
+		expect(item).toBe('some data');
+		var itembystring = target.getById("1");
+		expect(itembystring).toBe('some data');	
+	});
 });

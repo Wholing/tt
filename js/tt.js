@@ -84,7 +84,7 @@ var ViewModel = function(repo)
     var self = this;
     var errorMessageDisplayTime = 2000; // ms
 	self.identifier = ko.observable('').extend( { number: true}); //.extend({ minLength: 2, maxLength: 10 });
-	self.actions = ko.observableArray();
+	self.actions = ko.observableArray([]);
 	self.errorMessage = ko.observable('');
 
     self.layout = new ViewModelLayout(self.identifier, self.addAction);
@@ -104,6 +104,7 @@ var ViewModel = function(repo)
 		}
 		else
 		{
+			console.log(action);
 			person.actions.push(action);
 			self._repo.add(person);
 			self._repo.save();

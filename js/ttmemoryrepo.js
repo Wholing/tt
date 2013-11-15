@@ -14,7 +14,7 @@ function MemoryRepo () {
 
 	this.getById = function(id){
 		for (var i = _data.length - 1; i >= 0; i--) {
-			if (_data[i].id===id)
+			if (_data[i].id==id)
 				return _data[i].data;
 		}; 
 		return null;
@@ -25,7 +25,13 @@ function MemoryRepo () {
 	}
 }
 
+Person = function(id, name)
+{
+	return {"id" : id, "name" : name, "actions": []};
+}
+
 MockDataCreator = function(repo)
 {
-	repo.add(1,"Nils Nilsson");
+	repo.add(1, new Person(1,"Nils Nilsson"));
+	repo.save();
 };
